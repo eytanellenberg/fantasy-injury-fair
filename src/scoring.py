@@ -1,5 +1,4 @@
 import yaml
-import numpy as np
 
 with open("config.yaml") as f:
     CFG = yaml.safe_load(f)
@@ -15,7 +14,6 @@ def compute_fali(df):
         CFG["weights"]["injury_type"] * df.injury_f
     )
 
-    # interactions
     L += CFG["interactions"]["status_return"] * df.status_f * df.return_f
     L += CFG["interactions"]["return_schedule"] * df.return_f * df.schedule_f
     L += CFG["interactions"]["status_minutes"] * df.status_f * df.minutes_drop
@@ -24,15 +22,13 @@ def compute_fali(df):
 
     def band(x):
         if x < CFG["bands"]["dnp_high"]:
-            return "High risk"
+            return "High DNP risk"
         if x < CFG["bands"]["dnp_medium"]:
             return "Moderate risk"
         return "Stable"
 
-    df["band"] = df.fali.apply(band)
+    df["risk_band"] = df.fali.apply(band)
 
-    df["drivers"] = (
-        "status, return, minutes"
-    )
+    df["drivers"] = "status / return / minutes"
 
     return df
