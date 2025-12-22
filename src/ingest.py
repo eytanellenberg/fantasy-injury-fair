@@ -1,17 +1,26 @@
 import pandas as pd
 from src.injury_scrape import scrape_injuries
+from src.minutes_scrape import get_player_minutes
 
 def load_data():
     injury = scrape_injuries()
 
-    # minutes (exemple minimal, à brancher plus tard)
-    minutes = pd.DataFrame({
-        "player": injury.player,
-        "minutes_last": 28,
-        "minutes_avg": 34
-    })
+    minutes_rows = []
+
+    for p in injury.player.unique():
+        ml, ma = get_player_minutes(p)
+        minutes_rows.append([
+            p,
+            ml if ml is not None else 28,
+            ma if ma is not None else 34
+        ])
+
+    minutes = pd.DataFrame(
+        minutes_rows,
+        columns=["player", "minutes_last", "minutes_avg"]
+    )
 
     df = injury.merge(minutes, on="player", how="left")
-    df["b2b"] = 0  # branchable plus tard
+    df["b2b"] = 0  # schedule auto branchable next
 
     return df
