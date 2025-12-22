@@ -1,6 +1,11 @@
 name: Run weekly FALI
 
 on:
+  # 🕘 AUTOMATIQUE : mercredi soir
+  schedule:
+    - cron: "0 22 * * 3"   # mercredi 22:00 UTC ≈ 18:00 ET
+
+  # ▶️ MANUEL : bouton "Run workflow"
   workflow_dispatch:
 
 jobs:
@@ -19,11 +24,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run FALI
+      - name: Run FALI weekly report
         run: python run_weekly.py
 
-      - name: Upload outputs
+      - name: Upload weekly outputs
         uses: actions/upload-artifact@v4
         with:
-          name: fali-outputs
+          name: fali-weekly-report
           path: outputs/
