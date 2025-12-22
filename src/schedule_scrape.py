@@ -15,9 +15,8 @@ def load_nba_schedule():
             tables = pd.read_html(url)
             sched = tables[0]
 
-            # 🔑 CONVERSION DATETIME (LE FIX)
+            # 🔑 conversion datetime
             sched["Date"] = pd.to_datetime(sched["Date"], errors="coerce")
-
             sched = sched[sched["Date"].notna()]
 
             for d in sched["Date"]:
@@ -32,7 +31,7 @@ def load_nba_schedule():
 def compute_b2b(schedule_df):
     schedule_df = schedule_df.copy()
 
-    # 🔑 ASSURE datetime
+    # 🔑 assure datetime
     schedule_df["date"] = pd.to_datetime(schedule_df["date"], errors="coerce")
 
     schedule_df = schedule_df.sort_values(["team", "date"])
