@@ -1,11 +1,6 @@
 import pandas as pd
-import requests
 
 def load_nba_schedule():
-    """
-    Load NBA schedule from Basketball-Reference (team schedule).
-    Returns: DataFrame(team, date)
-    """
     teams = [
         "ATL","BOS","BKN","CHA","CHI","CLE","DAL","DEN","DET","GSW",
         "HOU","IND","LAC","LAL","MEM","MIA","MIL","MIN","NOP","NYK",
@@ -20,8 +15,10 @@ def load_nba_schedule():
             tables = pd.read_html(url)
             sched = tables[0]
 
-            sched = sched[sched["G"].notna()]
-            sched["Date"] = pd.to_datetime(sched["Date"])
+            # 🔑 CONVERSION DATETIME (LE FIX)
+            sched["Date"] = pd.to_datetime(sched["Date"], errors="coerce")
+
+            sched = sched[sched["Date"].notna()]
 
             for d in sched["Date"]:
                 rows.append([team, d])
@@ -33,6 +30,11 @@ def load_nba_schedule():
 
 
 def compute_b2b(schedule_df):
+    schedule_df = schedule_df.copy()
+
+    # 🔑 ASSURE datetime
+    schedule_df["date"] = pd.to_datetime(schedule_df["date"], errors="coerce")
+
     schedule_df = schedule_df.sort_values(["team", "date"])
     schedule_df["prev_date"] = schedule_df.groupby("team")["date"].shift(1)
 
