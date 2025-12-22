@@ -1,13 +1,17 @@
 import pandas as pd
+from src.injury_scrape import scrape_injuries
 
-def load_demo_data():
-    data = {
-        "player": ["Player A", "Player B", "Player C"],
-        "status": ["questionable", "probable", "out"],
-        "return_days": [3, 14, 0],
-        "minutes_last": [22, 34, 0],
-        "minutes_avg": [34, 36, 30],
-        "b2b": [1, 0, 0],
-        "injury_type": ["muscle", "joint", "muscle"]
-    }
-    return pd.DataFrame(data)
+def load_data():
+    injury = scrape_injuries()
+
+    # minutes (exemple minimal, à brancher plus tard)
+    minutes = pd.DataFrame({
+        "player": injury.player,
+        "minutes_last": 28,
+        "minutes_avg": 34
+    })
+
+    df = injury.merge(minutes, on="player", how="left")
+    df["b2b"] = 0  # branchable plus tard
+
+    return df
