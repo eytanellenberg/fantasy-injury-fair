@@ -1,14 +1,12 @@
-# FALI — Fantasy Availability & Limitation Index
+# FAIR Fantasy Injury Intelligence
 
-FAIR-Sport inspired injury & availability decision tool for NBA fantasy.
+Internal system to translate injury history, workload patterns,
+and schedule context into fantasy-relevant availability insights.
 
-## What it does
-- Auto-scrapes injury status
-- Computes a PAI-style availability score (FALI)
-- Flags DNP / minutes risk
-- Outputs start / bench guidance
+This repository supports:
+- editorial outputs (Substack / newsletters)
+- internal automation
+- future premium personalization
 
-## Run
-```bash
-pip install -r requirements.txt
-python run_weekly.py
+Engine: FAIR (proprietary)
+Audience: NBA fantasy basketball (season-long, daily moves)
