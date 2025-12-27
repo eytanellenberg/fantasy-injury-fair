@@ -1,5 +1,12 @@
 # Injury Reality Check: Anthony Davis
 
+Anthony Davis doesn’t hurt fantasy managers because he’s always injured.
+He hurts them because his availability risk is misread.
+
+This assessment follows the FAIR (Factor Attribution for Impact & Risk) framework:
+it does not predict outcomes, but clarifies which factors currently limit a player’s
+fantasy availability versus performance potential.
+
 ## What the injury label says
 Day-to-day. Questionable. Maintenance.
 
