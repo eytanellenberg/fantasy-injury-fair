@@ -1,21 +1,4 @@
-base_score: 85
-
-weights:
-  status: 22
-  return_window: 15
-  minutes_drop: 12
-  schedule: 8
-  injury_type: 10
-
-interactions:
-  status_return: 10
-  return_schedule: 8
-  status_minutes: 6
-
-thresholds:
-  start: 65
-  risky: 45
-
-bands:
-  dnp_high: 40
-  dnp_medium: 55
+league: nba
+mode: fantasy
+frequency: daily
+output_format: editorial
