@@ -1,12 +1,20 @@
-# FAIR Fantasy Injury Intelligence
+# Fantasy Injury FAIR (FALI)
 
-Internal system to translate injury history, workload patterns,
-and schedule context into fantasy-relevant availability insights.
+Weekly fantasy basketball intelligence using the FAIR / PAI framework.
 
-This repository supports:
-- editorial outputs (Substack / newsletters)
-- internal automation
-- future premium personalization
+## What this does
+- Runs automatically every Thursday
+- Generates a weekly FAIR / PAI fantasy brief
+- Outputs:
+  - Markdown editorial (Substack-ready)
+  - CSV player table
 
-Engine: FAIR (proprietary)
-Audience: NBA fantasy basketball (season-long, daily moves)
+## This is NOT
+- An injury report
+- A prediction engine
+
+## This IS
+- A causal attribution framework for fantasy value limitation
+
+## Outputs
+See `/outputs/` after each run or download artifacts from GitHub Actions.
