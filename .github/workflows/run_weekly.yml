@@ -1,11 +1,8 @@
 name: Run weekly FALI
 
 on:
-  # 🕘 AUTOMATIQUE : mercredi soir
   schedule:
-    - cron: "0 22 * * 3"   # mercredi 22:00 UTC ≈ 18:00 ET
-
-  # ▶️ MANUEL : bouton "Run workflow"
+    - cron: '0 9 * * 4'   # jeudi 09:00 UTC
   workflow_dispatch:
 
 jobs:
@@ -13,22 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run FALI weekly report
-        run: python run_weekly.py
+      - name: Run FALI weekly script
+        run: |
+          python src/run_fali_weekly.py
 
-      - name: Upload weekly outputs
+      - name: Upload FALI outputs
         uses: actions/upload-artifact@v4
         with:
-          name: fali-weekly-report
+          name: fali-weekly
           path: outputs/
